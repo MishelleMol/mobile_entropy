@@ -31,4 +31,36 @@ A continuación se mostrarán los resultados y un péqueño análisis de cada pr
     ![Mapa de Pares](images/mapa_de_pares.png)
     Esta prueba muestra un cuadro homogéneo en gris sin líneas, rejillas, diagonales o huecos oscuros. Cada celda de la cuadrícula se iluminó de forma balanceada, confirmando que la probabilidad de transición de cualquier número hacia el siguiente es uniforme y no está condicionada.
 
-5. **Conclusión**: Se pudo observar a lo largo de las pruebas que el sistema diseñado si representa un true randomness, que da numeros aleatorios por medio de la recolección de datos externos y el manejo de los mismos mediante un hashing.
+5. **Conclusión**: Se pudo observar a lo largo de las pruebas que el sistema diseñado si representa un "true randomness", que da numeros aleatorios por medio de la recolección de datos externos y el manejo de los mismos mediante un hashing.
+
+## Justificación del Método de Captura
+Como se mecionó anteriormente, se ralizaron 9 tomas de datos mediante la aplicación Phyphox, a una tasa de muestreo de aproximadamente 100 Hz durante sesiones de captura en tres condicones: reposo, en mano y en movimiento. Esta tasa permitió registrar cientos de miles de fluctuaciones analógicas infinitesimales generadas por el movimiento involuntario. Estos datos físicos sirvieron como una semilla altamente volatil que luego fue condicionada para alimentar al extractor SHA-256, logrando cubrir ampliamente los 160K enteros requeridos sin sesgos de muestreo.
+
+## Escalabilidad y análisis de costos
+Para que el proyecto pueda generar números aleatorios cada segundo durante todo un año, se propone mejorar el sistema actual de la siguiente manera:
+
+1. **Raspberry Pi:** En lugar de utilizar un teléfono, se utilizará una Raspberry Pi 4, ya que es pequeña, consume poca energía y tiene suficiente capacidad para ejecutar el código de Python continuamente.
+
+2. **Sensor de aceleración:** Se utilizará un sensor conectado directamente a la Raspberry Pi, capaz de tomar 100 mediciones por segundo. Además, tendremos dos sensores de repuesto.
+
+3. **Almacenamiento SSD:** Se utilizará un SSD para guardar el sistema operativo y evitar el desgaste de las tarjetas de memoria tradicionales.
+
+4. **Procesamiento en RAM:** Los datos del sensor se procesarán directamente en la memoria RAM, sin necesidad de guardar archivos intermedios. Esto permitirá trabajar más rápido y reducir el desgaste del almacenamiento.
+
+5. **Entrega de números:** Se mantendrán números previamente procesados en memoria para que el sistema pueda entregarlos cada segundo mediante una API local, sin tener que esperar a que se generen en ese momento.
+
+### Presupuesto del proyecto
+El presupuesto se divide en dos partes: **CapEx**, que representa la inversión inicial en los componentes, y **OpEx**, que corresponde a los gastos necesarios para mantener el sistema funcionando.
+
+| Componente | Tipo | Costo (USD) |
+|---|---|---:|
+| Raspberry Pi 4 (4 GB) | CapEx | $75.00 |
+| 3 sensores de aceleración | CapEx | $15.00 |
+| SSD de 120 GB | CapEx | $25.00 |
+| Batería de respaldo (Mini-UPS) | CapEx | $40.00 |
+| Caja protectora y cables | CapEx | $20.00 |
+| Electricidad anual | OpEx | $12.50 |
+| Mantenimiento anual | OpEx | $30.00 |
+| **Total estimado del primer año** | | **$217.50** |
+
+Esta propuesta busca que el proyecto sea económicamente rentable, que no priorice ni la generación de números ni el consumo monetario, sino que sea una balanza entre ambos y que, sobretodo, no esté lejos del alcance de estudiantes como nosotros. Por eso este sistema consume poca energía y puede funcionar sin depender de un teléfono móvil.
